@@ -62,7 +62,7 @@ def col_to_hex(col):
 def pretty_xml(elem):
     """Returns a pretty-printed XML string for the Element"""
 
-    rough_string = ElementTree.tostring(elem, 'utf-8')
+    rough_string = ElementTree.tostring(elem, 'unicode')
     reparsed = minidom.parseString(rough_string)
     return reparsed.toprettyxml(indent='  ')
 
