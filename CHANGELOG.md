@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+
+## [0.0.2] - 2019-05-04
+
+### Added
 - [Changelog](CHANGELOG.md)
 - [License](LICENSE)
 - [Readme](README.md)
@@ -23,15 +38,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Rewrite `DATA_OT_CurveExportSVG`
   - Split logic in more methods
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - Typos and descriptions
 - Viewbox is now properly defined
-
-### Security
 
 
 ## [0.0.1] - 2017-01-28
@@ -40,5 +49,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Initial `export_svg.py` script
 
 
-[Unreleased]: https://github.com/aryelgois/blender-curve-to-svg/compare/v0.0.1...develop
+[Unreleased]: https://github.com/aryelgois/blender-curve-to-svg/compare/v0.0.2...develop
+[0.0.2]: https://github.com/aryelgois/blender-curve-to-svg/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/aryelgois/blender-curve-to-svg/releases/tag/v0.0.1
