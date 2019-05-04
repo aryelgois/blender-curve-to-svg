@@ -28,3 +28,8 @@ Blender can import vectors, why not export?
 Select one or more 2D Curves,
 go to `Properties > Data > Export SVG`
 and export your curves to a SVG file.
+
+You can adjust the scale factor
+(how many pixels one blender unit represents)
+and the floating point precision.
+There is also the option to minify the SVG file to one line.
