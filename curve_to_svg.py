@@ -6,8 +6,8 @@ bl_info = {
     'location': "Properties > Data > Export SVG",
     'description': "Generate a SVG file from selected 2D Curves",
     'warning': "Curve splines may be inverted, so self intersections can be wrong after export",
-    'wiki_url': "",
-    'tracker_url': "",
+    'wiki_url': "https://github.com/aryelgois/blender-curve-to-svg",
+    'tracker_url': "https://github.com/aryelgois/blender-curve-to-svg/issues",
     'category': "Import-Export"}
 
 

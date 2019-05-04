@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [Changelog](CHANGELOG.md)
 - [License](LICENSE)
 - [Readme](README.md)
+- Links for GitHub repository
 
 ### Changed
 - Renamed `export_svg.py` to `curve_to_svg.py`
