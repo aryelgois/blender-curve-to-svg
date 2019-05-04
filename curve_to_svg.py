@@ -13,7 +13,7 @@ bl_info = {
 
 import bpy
 from xml.etree import ElementTree
-from xml.dom import minidom # for prettify()
+from xml.dom import minidom
 
 
 VERSION = '.'.join(str(v) for v in (bl_info['version']))
@@ -35,6 +35,13 @@ def col_to_hex(col):
     """Converts a Color object to hexadecimal"""
 
     return '#' + ''.join(to_hex(ch) for ch in col)
+
+def pretty_xml(elem):
+    """Returns a pretty-printed XML string for the Element"""
+
+    rough_string = ElementTree.tostring(elem, 'utf-8')
+    reparsed = minidom.parseString(rough_string)
+    return reparsed.toprettyxml(indent='  ')
 
 
 class CurveExportSVGPanel(bpy.types.Panel):
@@ -151,7 +158,7 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
         if scene.export_svg_minify:
             result = "<?xml version=\"1.0\" ?>" + ElementTree.tostring(svg, 'unicode')
         else:
-            result = self.prettify(svg)
+            result = pretty_xml(svg)
         f = open(scene.export_svg_output, 'w') # TODO: search if is there a better approach
         f.write(result)
         f.close()
@@ -182,14 +189,6 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
         box[3] = max([box[3], origin[1] + p[1], origin[1] + r[0][1], origin[1] + l[0][1]])
         # done
         return result
-
-    @staticmethod
-    def prettify(elem):
-        """Returns a pretty-printed XML string for the Element"""
-
-        rough_string = ElementTree.tostring(elem, 'utf-8')
-        reparsed = minidom.parseString(rough_string)
-        return reparsed.toprettyxml(indent='  ')
 
 
 def register():
