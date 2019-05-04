@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [Readme](README.md)
 
 ### Changed
+- Renamed `export_svg.py` to `curve_to_svg.py`
 
 ### Deprecated
 
