@@ -92,6 +92,9 @@ class CurveExportSVGPanel(bpy.types.Panel):
 
         if selected_2d_curve:
             row = layout.row()
+            row.prop(scene, 'export_svg_output', text="")
+
+            row = layout.row()
             row.prop(scene, 'export_svg_minify')
 
             row = layout.row()
@@ -99,9 +102,6 @@ class CurveExportSVGPanel(bpy.types.Panel):
 
             row = layout.row()
             row.prop(scene, 'export_svg_precision')
-
-            row = layout.row()
-            row.prop(scene, 'export_svg_output', text="")
 
             row = layout.row()
             row.operator('curve.export_svg', text="Export")
@@ -279,6 +279,17 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
 def register():
     """Registers curve_to_svg Add-on"""
 
+    bpy.types.Scene.export_svg_output = bpy.props.StringProperty(
+            name="Output",
+            description="Path to output file",
+            default="output.svg",
+            subtype='FILE_PATH')
+
+    bpy.types.Scene.export_svg_minify = bpy.props.BoolProperty(
+            name="Minify",
+            description="SVG in one line",
+            default=False)
+
     bpy.types.Scene.export_svg_scale = bpy.props.IntProperty(
             name="Scale",
             description="How many pixels one blender unit represents",
@@ -292,17 +303,6 @@ def register():
             min=0,
             max=21)
 
-    bpy.types.Scene.export_svg_minify = bpy.props.BoolProperty(
-            name="Minify",
-            description="SVG in one line",
-            default=False)
-
-    bpy.types.Scene.export_svg_output = bpy.props.StringProperty(
-            name="Output",
-            description="Path to output file",
-            default="output.svg",
-            subtype='FILE_PATH')
-
     bpy.utils.register_class(DATA_OT_CurveExportSVG)
     bpy.utils.register_class(CurveExportSVGPanel)
 
@@ -313,10 +313,10 @@ def unregister():
     bpy.utils.unregister_class(CurveExportSVGPanel)
     bpy.utils.unregister_class(DATA_OT_CurveExportSVG)
 
+    del bpy.types.Scene.export_svg_output
+    del bpy.types.Scene.export_svg_minify
     del bpy.types.Scene.export_svg_scale
     del bpy.types.Scene.export_svg_precision
-    del bpy.types.Scene.export_svg_minify
-    del bpy.types.Scene.export_svg_output
 
 
 if __name__ == '__main__':
