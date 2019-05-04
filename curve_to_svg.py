@@ -46,6 +46,7 @@ def pretty_xml(elem):
 
 class CurveExportSVGPanel(bpy.types.Panel):
     """Creates a Panel in the data context of the properties editor"""
+
     bl_label = "Export SVG"
     bl_idname = 'DATA_PT_exportsvg'
     bl_space_type = 'PROPERTIES'
@@ -91,6 +92,7 @@ class CurveExportSVGPanel(bpy.types.Panel):
 
 class DATA_OT_CurveExportSVG(bpy.types.Operator):
     """Generates a SVG file from selected 2D Curves"""
+
     bl_label = "Export SVG"
     bl_idname = 'curve.export_svg'
 
