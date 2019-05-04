@@ -19,6 +19,24 @@ from xml.dom import minidom # for prettify()
 VERSION = '.'.join(str(v) for v in (bl_info['version']))
 
 
+def to_hex(ch):
+    """Converts linear channel to sRGB and then to hexadecimal"""
+    # Author: @brecht
+    # Link: https://devtalk.blender.org/t/get-hex-gamma-corrected-color/2422/2
+
+    if ch < 0.0031308:
+        srgb = 0.0 if ch < 0.0 else ch * 12.92
+    else:
+        srgb = ch ** (1.0 / 2.4) * 1.055 - 0.055
+
+    return format(max(min(int(srgb * 255 + 0.5), 255), 0), '02x')
+
+def col_to_hex(col):
+    """Converts a Color object to hexadecimal"""
+
+    return '#' + ''.join(to_hex(ch) for ch in col)
+
+
 class CurveExportSVGPanel(bpy.types.Panel):
     """Creates a Panel in the data context of the properties editor"""
     bl_label = "Export SVG"
@@ -126,7 +144,7 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
                     paths[id_].set('id', obj.name)
                     paths[id_].set('transform', "translate({} {})".format(*origin))
                     if obj.data.materials and obj.data.materials[id_] is not None:
-                        paths[id_].set('style', "fill: {};".format(self.col_to_hex(obj.data.materials[id_].diffuse_color)))
+                        paths[id_].set('style', "fill: {};".format(col_to_hex(obj.data.materials[id_].diffuse_color)))
                     paths[id_].set('d', ' '.join(d))
 
         svg.set('viewBox', ' '.join(str(x) for x in (box[0], -box[3], box[2] - box[0], box[3] - box[1])))
@@ -163,16 +181,6 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
         box[2] = max([box[2], origin[0] + p[0], origin[0] + r[0][0], origin[0] + l[0][0]])
         box[3] = max([box[3], origin[1] + p[1], origin[1] + r[0][1], origin[1] + l[0][1]])
         # done
-        return result
-
-    @staticmethod
-    def col_to_hex(col):
-        """Converts a gamma-corrected Color to hexadecimal"""
-
-        result = '#'
-        gamma = 1.0 / 2.2607278 #2.2 wasn't too precise :p but it's not exactly. TODO: figure out how to properly convert Color object to #hex
-        for ch in col:
-            result += format(round(pow(ch, gamma) * 255), 'x')
         return result
 
     @staticmethod
