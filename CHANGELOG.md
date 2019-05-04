@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Better messages when having other objects selected
 - Refactor `col_to_hex()`
 - Rename `prettify()` to `pretty_xml()`
+- Rewrite `DATA_OT_CurveExportSVG`
+  - Split logic in more methods
 
 ### Deprecated
 
