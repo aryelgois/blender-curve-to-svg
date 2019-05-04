@@ -24,10 +24,6 @@ class CurveExportSVGPanel(bpy.types.Panel):
     bl_region_type = 'WINDOW'
     bl_context = 'data'
 
-    @classmethod
-    def poll(cls, context):
-        return context.object.type == 'CURVE'
-
     def draw(self, context):
         show = 0
         for obj in context.selected_objects:
@@ -52,6 +48,10 @@ class CurveExportSVGPanel(bpy.types.Panel):
             row.operator('curve.export_svg', text="Export")
         else:
             layout.label(text="Must select only 2D Curve")
+
+    @classmethod
+    def poll(cls, context):
+        return context.object.type == 'CURVE'
 
 
 class DATA_OT_CurveExportSVG(bpy.types.Operator):
