@@ -19,10 +19,10 @@ from xml.dom import minidom # for prettify()
 class CurveExportSVGPanel(bpy.types.Panel):
     """Creates a Panel in the data context of the properties editor"""
     bl_label = "Export SVG"
-    bl_idname = "DATA_PT_exportsvg"
+    bl_idname = 'DATA_PT_exportsvg'
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
-    bl_context = "data"
+    bl_context = 'data'
 
     @classmethod
     def poll(cls, context):
@@ -40,13 +40,13 @@ class CurveExportSVGPanel(bpy.types.Panel):
         layout = self.layout
         if show > 0:
             row = layout.row()
-            row.prop(scene, "export_svg_minify")
+            row.prop(scene, 'export_svg_minify')
 
             row = layout.row()
-            row.prop(scene, "export_svg_precision")
+            row.prop(scene, 'export_svg_precision')
 
             row = layout.row()
-            row.prop(scene, "export_svg_output", text="")
+            row.prop(scene, 'export_svg_output', text="")
 
             row = layout.row()
             row.operator('curve.export_svg', text="Export")
@@ -201,5 +201,5 @@ def unregister():
     del bpy.types.Scene.export_svg_output
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     register()
