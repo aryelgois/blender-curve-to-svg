@@ -1,7 +1,18 @@
 # Blender Curve to SVG
 
-A simple Blender add-on that
-allows exporting 2D curves to SVG files.
+> A simple Blender add-on for exporting 2D curves to SVG files
+
+Who doesn’t like to edit curves in Blender? :stuck_out_tongue:
+
+I mean,
+precise transform operators
+that allow to input values or expressions,
+dynamic workflow with combination of hot-keys,
+a global pivot to do complex transformations,
+and you can even set the handle coordinates!
+
+If that fancy curve could be exported…
+Blender can import vectors, why not export?
 
 
 ## Install
