@@ -14,6 +14,7 @@ bl_info = {
 import bpy
 from xml.etree import ElementTree
 from xml.dom import minidom
+from mathutils import Vector
 
 
 VERSION = '.'.join(str(v) for v in (bl_info['version']))
@@ -114,6 +115,7 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
 
     def execute(self, context):
         scene = context.scene
+        precision = scene.export_svg_precision
 
         svg = ElementTree.Element('svg')
         svg.set('xmlns', "http://www.w3.org/2000/svg")
@@ -155,6 +157,7 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
                     if obj.data.materials and obj.data.materials[id_] is not None:
                         paths[id_].set('style', "fill: {};".format(col_to_hex(obj.data.materials[id_].diffuse_color)))
                     paths[id_].set('d', ' '.join(d))
+            self.update_viewbox(box, obj, precision)
 
         svg.set('viewBox', ' '.join(str(x) for x in (box[0], -box[3], box[2] - box[0], box[3] - box[1])))
         if scene.export_svg_minify:
@@ -167,7 +170,7 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
         return {'FINISHED'}
 
 
-    def command_calc(self, scene, obj, spline, point, origin, d, prev, box): # TODO: get all these values without having to pass (except 'point')
+    def command_calc(self, scene, obj, spline, point, origin, d, prev): # TODO: get all these values without having to pass (except 'point')
         """Calculates the path's next command"""
 
         precision = scene.export_svg_precision
@@ -184,13 +187,19 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
         # update prev
         del prev[:]
         prev.extend(r)
-        # update boundingbox
-        box[0] = min([box[0], origin[0] + p[0], origin[0] + r[0][0], origin[0] + l[0][0]])
-        box[1] = min([box[1], origin[1] + p[1], origin[1] + r[0][1], origin[1] + l[0][1]])
-        box[2] = max([box[2], origin[0] + p[0], origin[0] + r[0][0], origin[0] + l[0][0]])
-        box[3] = max([box[3], origin[1] + p[1], origin[1] + r[0][1], origin[1] + l[0][1]])
         # done
         return result
+
+
+    def update_viewbox(self, vbox, obj, precision):
+        """Updates viewBox coords to fit an object"""
+
+        bbox = [(obj.matrix_world * Vector(corner)).to_tuple(precision) for corner in obj.bound_box]
+
+        vbox[0] = min([vbox[0], bbox[0][0], bbox[1][0], bbox[2][0], bbox[3][0]])
+        vbox[1] = min([vbox[1], bbox[0][1], bbox[1][1], bbox[4][1], bbox[5][1]])
+        vbox[2] = max([vbox[2], bbox[4][0], bbox[5][0], bbox[6][0], bbox[7][0]])
+        vbox[3] = max([vbox[3], bbox[2][1], bbox[3][1], bbox[6][1], bbox[7][1]])
 
 
 def register():
