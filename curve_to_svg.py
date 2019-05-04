@@ -2,7 +2,7 @@ bl_info = {
     'name': "Export 2D Curve to SVG",
     'author': "Aryel Mota Góis",
     'version': (0, 0, 2),
-    'blender': (2, 77, 0),
+    'blender': (2, 80, 0),
     'location': "Properties > Data > Export SVG",
     'description': "Generate a SVG file from selected 2D Curves",
     'warning': "Curve splines may be inverted, so self intersections can be wrong after export",
