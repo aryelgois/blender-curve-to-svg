@@ -4,8 +4,8 @@ bl_info = {
     'version': (0, 0, 1),
     'blender': (2, 77, 0),
     'location': "Properties > Data > Export SVG",
-    'description': "Generate an SVG file from selected 2D Curves",
-    'warning': "Curve splines may be inverted, so auto-intersections can be wrong after export",
+    'description': "Generate a SVG file from selected 2D Curves",
+    'warning': "Curve splines may be inverted, so self intersections can be wrong after export",
     'wiki_url': "",
     'tracker_url': "",
     'category': "Import-Export"}
@@ -17,7 +17,7 @@ from xml.dom import minidom # for prettify()
 
 
 class CurveExportSVGPanel(bpy.types.Panel):
-    """Creates a Panel in the Data properties window"""
+    """Creates a Panel in the data context of the properties editor"""
     bl_label = "Export SVG"
     bl_idname = "DATA_PT_exportsvg"
     bl_space_type = 'PROPERTIES'
@@ -55,7 +55,7 @@ class CurveExportSVGPanel(bpy.types.Panel):
 
 
 class DATA_OT_CurveExportSVG(bpy.types.Operator):
-    """Generate an SVG file from selected 2D Curves."""
+    """Generates a SVG file from selected 2D Curves"""
     bl_label = "Export SVG"
     bl_idname = 'curve.export_svg'
 
@@ -130,7 +130,7 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
 
 
     def command_calc(self, scene, obj, spline, point, origin, d, prev, box): # TODO: get all these values without having to pass (except 'point')
-        """Calculate the path's next command."""
+        """Calculates the path's next command"""
 
         precision = scene.export_svg_precision
         p = point.co.to_2d().to_tuple(precision)
@@ -156,7 +156,7 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
 
     @staticmethod
     def col_to_hex(col):
-        """Convert a gamma-corrected Color to hexadecimal."""
+        """Converts a gamma-corrected Color to hexadecimal"""
 
         result = '#'
         gamma = 1.0 / 2.2607278 #2.2 wasn't too precise :p but it's not exactly. TODO: figure out how to properly convert Color object to #hex
@@ -166,7 +166,7 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
 
     @staticmethod
     def prettify(elem):
-        """Return a pretty-printed XML string for the Element."""
+        """Returns a pretty-printed XML string for the Element"""
 
         rough_string = ElementTree.tostring(elem, 'utf-8')
         reparsed = minidom.parseString(rough_string)
