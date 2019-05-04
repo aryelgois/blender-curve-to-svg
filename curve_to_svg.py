@@ -25,16 +25,18 @@ class CurveExportSVGPanel(bpy.types.Panel):
     bl_context = 'data'
 
     def draw(self, context):
-        show = 0
-        for obj in context.selected_objects:
-            if obj.type == 'CURVE' and obj.data.dimensions == '2D':
-                show += 1
-            else:
-                show -= 1
-
         scene = context.scene
         layout = self.layout
-        if show > 0:
+        selected_2d_curve = False
+        selected_other = False
+
+        for obj in context.selected_objects:
+            if obj.type == 'CURVE' and obj.data.dimensions == '2D':
+                selected_2d_curve = True
+            else:
+                selected_other = True
+
+        if selected_2d_curve:
             row = layout.row()
             row.prop(scene, 'export_svg_minify')
 
@@ -46,8 +48,13 @@ class CurveExportSVGPanel(bpy.types.Panel):
 
             row = layout.row()
             row.operator('curve.export_svg', text="Export")
+
+            if selected_other:
+                layout.label(icon='ERROR', text="Notice: only selected 2D Curves will be exported")
         else:
-            layout.label(text="Must select only 2D Curve")
+            layout.label(icon='ERROR', text="You must select a 2D Curve")
+
+            layout.label(text="Go to Shape panel and select 2D")
 
     @classmethod
     def poll(cls, context):
