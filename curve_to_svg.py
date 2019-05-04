@@ -77,6 +77,8 @@ class CurveExportSVGPanel(bpy.types.Panel):
     bl_context = 'data'
 
     def draw(self, context):
+        """Draws the Export SVG Panel"""
+
         scene = context.scene
         layout = self.layout
         selected_2d_curve = False
@@ -110,6 +112,8 @@ class CurveExportSVGPanel(bpy.types.Panel):
 
     @classmethod
     def poll(cls, context):
+        """Checks if the Export SVG Panel should appear"""
+
         return context.object.type == 'CURVE'
 
 
@@ -136,6 +140,8 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
     #handle_type = {'AUTO', 'ALIGNED', 'VECTOR', 'FREE'}
 
     def execute(self, context):
+        """Exports selected 2D Curves to SVG file"""
+
         scene = context.scene
         precision = scene.export_svg_precision
 
@@ -266,6 +272,8 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
 
 
 def register():
+    """Registers curve_to_svg Add-on"""
+
     bpy.types.Scene.export_svg_precision = bpy.props.IntProperty(
             name="Precision",
             description="Precision of floating point Vectors",
@@ -289,6 +297,8 @@ def register():
 
 
 def unregister():
+    """Unregisters curve_to_svg Add-on"""
+
     bpy.utils.unregister_class(CurveExportSVGPanel)
     bpy.utils.unregister_class(DATA_OT_CurveExportSVG)
 
