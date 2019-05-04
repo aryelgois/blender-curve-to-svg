@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Removed
 
 ### Fixed
+- Use matrix multiplication operator — _see [PEP 465]_
 
 ### Security
 
@@ -53,3 +54,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [Unreleased]: https://github.com/aryelgois/blender-curve-to-svg/compare/v0.0.2...develop
 [0.0.2]: https://github.com/aryelgois/blender-curve-to-svg/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/aryelgois/blender-curve-to-svg/releases/tag/v0.0.1
+
+[PEP 465]: https://www.python.org/dev/peps/pep-0465/

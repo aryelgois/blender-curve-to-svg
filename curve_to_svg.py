@@ -268,7 +268,7 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
     def update_viewbox(self, vbox, obj, precision):
         """Updates viewBox coords to fit an object"""
 
-        bbox = [(obj.matrix_world * Vector(corner)).to_tuple(precision) for corner in obj.bound_box]
+        bbox = [(obj.matrix_world @ Vector(corner)).to_tuple(precision) for corner in obj.bound_box]
 
         vbox[0] = min([vbox[0], bbox[0][0], bbox[1][0], bbox[2][0], bbox[3][0]])
         vbox[1] = min([vbox[1], bbox[0][1], bbox[1][1], bbox[4][1], bbox[5][1]])
