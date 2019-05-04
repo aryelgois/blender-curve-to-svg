@@ -1,6 +1,6 @@
 bl_info = {
     'name': "Export 2D Curve to SVG",
-    'author': "Aryel",
+    'author': "Aryel Mota Góis",
     'version': (0, 0, 1),
     'blender': (2, 77, 0),
     'location': "Properties > Data > Export SVG",
