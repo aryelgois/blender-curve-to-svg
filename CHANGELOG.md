@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Use matrix multiplication operator — _see [PEP 465]_
+- Limit colors to three channels
+  - Some programs do not recognize the alpha channel
 
 ### Security
 

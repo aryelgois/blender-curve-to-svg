@@ -56,7 +56,7 @@ def to_hex(ch):
 def col_to_hex(col):
     """Converts a Color object to hexadecimal"""
 
-    return '#' + ''.join(to_hex(ch) for ch in col)
+    return '#' + ''.join(to_hex(ch) for ch in col[:3])
 
 
 def pretty_xml(elem):
