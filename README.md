@@ -17,8 +17,9 @@ Blender can import vectors, why not export?
 
 ## Install
 
-- Go to `Add-ons` tab in the `User Preferences`
-- Click `Install Add-on from File...`
+- Go to `Add-ons` tab in the `Preferences`
+  (menu `Edit > Preferences…`)
+- Click `Install…`
 - Find and select `curve_to_svg.py`
 - Enable the add-on by clicking on its checkbox
 
