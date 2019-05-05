@@ -1,3 +1,5 @@
+[![Blender](https://img.shields.io/badge/Blender-2.80-F5792A.svg?logo=blender&logoColor=white)](https://www.blender.org/)
+
 # Blender Curve to SVG
 
 > A simple Blender add-on for exporting 2D curves to SVG files
