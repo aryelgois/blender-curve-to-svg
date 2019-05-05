@@ -67,7 +67,7 @@ def pretty_xml(elem):
     return reparsed.toprettyxml(indent='  ')
 
 
-class CurveExportSVGPanel(bpy.types.Panel):
+class DATA_PT_CurveExportSVG(bpy.types.Panel):
     """Creates a Panel in the data context of the properties editor"""
 
     bl_label = "Export SVG"
@@ -304,13 +304,13 @@ def register():
             max=21)
 
     bpy.utils.register_class(DATA_OT_CurveExportSVG)
-    bpy.utils.register_class(CurveExportSVGPanel)
+    bpy.utils.register_class(DATA_PT_CurveExportSVG)
 
 
 def unregister():
     """Unregisters curve_to_svg Add-on"""
 
-    bpy.utils.unregister_class(CurveExportSVGPanel)
+    bpy.utils.unregister_class(DATA_PT_CurveExportSVG)
     bpy.utils.unregister_class(DATA_OT_CurveExportSVG)
 
     del bpy.types.Scene.export_svg_output
